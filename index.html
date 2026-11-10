@@ -1,0 +1,659 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Small Surprise For You 💗</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #100509;
+  color: white;
+  font-family: Georgia, serif;
+  overflow: hidden;
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* BACKGROUND GLOW */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 45%, #4a1025 0%, transparent 65%),
+    linear-gradient(145deg, #13070d, #090208);
+  z-index: -1;
+}
+
+/* SCREENS */
+
+.screen {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* OPENING SCREEN */
+
+#opening {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  animation: fadeIn 1.5s ease;
+}
+
+.open-title {
+  font-size: clamp(35px, 9vw, 55px);
+  font-style: italic;
+  color: #fff2f7;
+  line-height: 1.5;
+  text-shadow: 0 0 20px #ff7eae;
+}
+
+.paper {
+  width: min(90%, 370px);
+  background: #f9e7cb;
+  color: #241317;
+  padding: 28px 20px;
+  margin: 35px auto;
+  transform: rotate(-3deg);
+  box-shadow: 0 12px 35px #0009;
+  position: relative;
+}
+
+.paper::before {
+  content: " ";
+  position: absolute;
+  width: 90px;
+  height: 18px;
+  background: #e77d83;
+  top: -8px;
+  left: 35%;
+  transform: rotate(-4deg);
+}
+
+.paper p {
+  font-family: cursive;
+  font-size: 25px;
+  line-height: 1.7;
+}
+
+.open-btn {
+  padding: 16px 27px;
+  border-radius: 50px;
+  border: 2px solid #ff9fc3;
+  color: white;
+  font-size: 18px;
+  background: linear-gradient(90deg, #ff367e, #bd0752);
+  box-shadow: 0 0 25px #ff2878;
+  cursor: pointer;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  50% { transform: scale(1.06); }
+}
+
+.gift-area {
+  font-size: 65px;
+  margin-top: 30px;
+  animation: giftBounce 2s infinite;
+}
+
+@keyframes giftBounce {
+  50% { transform: translateY(-12px) rotate(5deg); }
+}
+
+/* FAIRY LIGHTS */
+
+.fairy {
+  position: absolute;
+  top: 18px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  z-index: 2;
+}
+
+.fairy span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ffe5a3;
+  box-shadow: 0 0 15px 5px #ffce78;
+  animation: twinkle 1.5s infinite alternate;
+}
+
+.fairy span:nth-child(even) {
+  animation-delay: .7s;
+}
+
+@keyframes twinkle {
+  to { opacity: .25; transform: scale(.6); }
+}
+
+/* HANGING PHOTOS */
+
+.hanging {
+  position: absolute;
+  top: 65px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  z-index: 2;
+}
+
+.photo-frame {
+  position: relative;
+  width: 90px;
+  height: 115px;
+  transform: rotate(var(--rot));
+  margin: 0;
+}
+
+.photo-frame:nth-child(2) {
+  margin-top: 45px;
+}
+
+.photo-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0;
+  background: transparent;
+  opacity: 0;
+  transition: opacity 1s ease;
+  filter: drop-shadow(0 4px 8px #0009);
+}
+
+.photo-frame img.active {
+  opacity: 1;
+}
+
+@media(max-width:500px) {
+  .photo-frame {
+    width: 75px;
+    height: 95px;
+  }
+}
+
+/* BIRTHDAY SCREEN */
+
+#birthday {
+  display: none;
+  background:
+    radial-gradient(ellipse at center, #380d23, #100309 75%);
+  overflow: hidden;
+}
+
+.birthday-content {
+  position: relative;
+  z-index: 8;
+  width: 100%;
+  max-width: 500px;
+  padding: 20px 17px;
+  text-align: center;
+  animation: reveal 1.5s ease;
+}
+
+.birthday-title {
+  color: #ff9ec7;
+  font-size: clamp(28px, 7vw, 42px);
+  font-style: italic;
+  line-height: 1.1;
+  text-shadow:
+    0 0 8px #ff4c91,
+    0 0 20px #ff277b,
+    0 0 40px #ff277b;
+  margin-bottom: 28px;
+}
+
+.birthday-message {
+  font-family: cursive;
+  font-size: clamp(17px, 4.5vw, 21px);
+  line-height: 1.9;
+  color: #fff0f5;
+}
+
+.birthday-cake {
+  font-size: 65px;
+  margin-top: 24px;
+  display: inline-block;
+  animation: cake 1.5s infinite;
+  filter: drop-shadow(0 0 15px #ff4a91);
+}
+
+@keyframes cake {
+  50% { transform: translateY(-12px) scale(1.1); }
+}
+
+@keyframes reveal {
+  from { opacity: 0; transform: scale(.7); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* PHOTO FRAMES */
+
+.photo {
+  position: fixed;
+  top: -180px;
+  width: 130px;
+  height: 130px;
+  padding: 5px;
+  background: white;
+  object-fit: cover;
+  border-radius: 3px;
+  z-index: 4;
+  pointer-events: none;
+  box-shadow: 0 0 20px #ff5798;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(-10vh) rotate(var(--start));
+  }
+  to {
+    transform: translate(var(--drift), 115vh)
+      rotate(var(--end));
+  }
+}
+
+/* FLOATING HEARTS */
+
+.particle {
+  position: fixed;
+  bottom: -60px;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.heart {
+  animation: heartMove 6s linear forwards;
+}
+
+@keyframes heartMove {
+  to {
+    transform: translateY(-115vh) translateX(45px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.star {
+  animation: starMove 5s linear forwards;
+}
+
+@keyframes starMove {
+  to {
+    transform: translateY(-115vh) rotate(720deg) scale(.2);
+    opacity: 0;
+  }
+}
+
+.balloon {
+  animation: balloonMove 8s linear forwards;
+}
+
+@keyframes balloonMove {
+  to {
+    transform: translateY(-115vh) translateX(-40px) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+.rose {
+  animation: roseMove 7s linear forwards;
+}
+
+@keyframes roseMove {
+  to {
+    transform: translateY(-115vh) rotate(280deg);
+    opacity: 0;
+  }
+}
+
+/* MOBILE */
+
+@media(max-width:500px) {
+  .hanging img {
+    width: 65px;
+    height: 78px;
+  }
+
+  .birthday-content {
+    padding: 15px;
+  }
+
+  .birthday-message {
+    line-height: 1.75;
+  }
+
+  .photo {
+    width: 78px;
+    height: 105px;
+  }
+}
+/* SECOND PAGE ONLY */
+/* SECOND PAGE FALLING PHOTOS */
+
+#birthday ~ .photo,
+.photo {
+  position: fixed;
+  top: -180px;
+  width: 110px;
+  height: 140px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  object-fit: contain;
+  border-radius: 5px;
+  z-index: 4;
+  pointer-events: none;
+  box-shadow: 0 0 15px #ff5798;
+  animation: fall linear forwards;
+}
+</style>
+</head>
+
+<body>
+  <audio id="birthdaySong" loop preload="auto">
+    <source src="birthday.mp3" type="audio/mpeg">
+   
+  </audio>
+<!-- OPENING SCREEN -->
+
+<div id="opening" class="screen">
+
+  <div class="fairy">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+    <span></span><span></span>
+  </div>
+
+  <div class="hanging">
+
+    <div class="photo-frame" style="--rot:-12deg">
+      <img class="active" src="WhatsApp Image 2026-11-09 at 15.07.20.jpg">
+      <img src="WhatsApp Image 2026-11-09 at 15.07.20.jpg">
+      <img src="WhatsApp Image 2026-11-09 at 15.31.44.jpeg">
+      <img src="WhatsApp Image 2026-11-09 at 15.31.44 (1).jpeg" alt="">
+    </div>
+  
+    <div class="photo-frame" style="--rot:8deg">
+      <img class="active" src="WhatsApp Image 2026-11-09 at 15.31.45 (2).jpeg">
+      <img src="WhatsApp Image 2026-11-09 at 15.31.46.jpeg">
+      <img src="WhatsApp Image 2026-11-09 at 15.31.46 (1).jpeg">
+      <img src="WhatsApp Image 2026-11-09 at 15.31.46 (1).jpeg" alt="">
+    </div>
+  
+    <div class="photo-frame" style="--rot:-8deg">
+      <img class="active" src="WhatsApp Image 2026-11-09 at 15.31.44.jpeg">
+      <img src="WhatsApp Image 2026-11-09 at 15.31.45.jpeg">
+      <img src="WhatsApp Image 2026-11-09 at 15.07.20.jpeg">
+      <img src="WhatsApp Image 2026-11-09 at 15.31.46 (3).jpeg" alt="">
+    </div>
+
+    <div class="photo-frame" style="--rot:-8deg">
+      <img class="active" src="WhatsApp Image 2026-11-09 at 15.31.44.jpeg">
+      <img src="WhatsApp Image 2026-11-09 at 15.07.20.jpeg">
+      <img src="WhatsApp Image 2026-11-09 at 15.31.44 (1).jpeg">
+      <img src="WhatsApp Image 2026-11-09 at 15.31.44 (1).jpeg" alt="">
+    </div>
+  </div>
+
+  <div style="position:relative;z-index:5;width:100%;">
+
+    <h1 class="open-title">
+      A Small Surprise<br>For You 💖
+    </h1>
+
+    <div class="paper">
+      <p>
+        Hey Beautiful! 💗<br>
+        I have a small<br>
+        surprise for you...<br>
+        ♡
+      </p>
+    </div>
+
+    <button class="open-btn" onclick="openSurprise()">
+      Open Your Surprise 🎁
+    </button>
+
+    <div class="gift-area">
+      🎁 🧸 🌹
+    </div>
+
+  </div>
+</div>
+
+
+<!-- BIRTHDAY SCREEN -->
+
+<div id="birthday" class="screen">
+
+  <div class="birthday-content">
+
+    <h1 class="birthday-title">
+      Happy<br>Birthday To My<br>Online Friend! 💕
+    </h1>
+
+    <div class="birthday-message">
+
+      Wishing you all the happiness in the world.<br>
+      May you always have reasons to smile and<br>
+      May your day be filled with happiness 💖<br><br>
+
+      It's nice having you as an online friend,<br>
+      and hopefully, someday we'll get to meet in person too. <br>
+      Until then, sending you lots of  <br> 
+      good wishes and positive vibes.🥰<br><br>
+      I hope this beautiful connection will stay with us forever.🌸✨<br>
+      Have a beautiful day! ❤️ ❤️
+
+    </div>
+
+    <div class="birthday-cake">
+      💗
+    </div>
+
+    <p style="color:#ff9ec7;font-size:17px;">
+      Made with love, just for you ♡
+    </p>
+
+  </div>
+</div>
+
+
+<script>
+  // AUTOMATIC PHOTO SLIDESHOW
+
+document.querySelectorAll(".photo-frame").forEach((frame) => {
+
+const images = frame.querySelectorAll("img");
+let currentIndex = 0;
+
+setInterval(() => {
+
+  images[currentIndex].classList.remove("active");
+
+  currentIndex = (currentIndex + 1) % images.length;
+
+  images[currentIndex].classList.add("active");
+
+}, 3000);
+
+});
+const song = document.getElementById("birthdaySong");
+
+song.volume = 0.8;
+
+document.addEventListener("click", function startMusic() {
+    song.play()
+        .then(() => {
+            console.log("Music started successfully!");
+        })
+        .catch(error => {
+            console.error("Music error:", error);
+        });
+}, { once: true });
+
+const photos = [
+  "WhatsApp Image 2026-11-09 at 15.07.20 (1).jpeg",
+  "WhatsApp Image 2026-11-09 at 15.07.20.jpeg",
+  "WhatsApp Image 2026-11-09 at 15.07.20.jpg",
+  "WhatsApp Image 2026-11-09 at 15.31.44 (1).jpeg",
+  "WhatsApp Image 2026-11-09 at 15.31.44.jpeg",
+  "WhatsApp Image 2026-11-09 at 15.31.45 (1).jpeg",
+  "WhatsApp Image 2026-11-09 at 15.31.45 (2).jpeg",
+  "WhatsApp Image 2026-11-09 at 15.31.45 (2).jpeg",
+  "WhatsApp Image 2026-11-09 at 15.31.45.jpeg",
+  "WhatsApp Image 2026-11-09 at 15.31.46 (1).jpeg",
+  "WhatsApp Image 2026-11-09 at 15.31.46 (2).jpeg",
+  "WhatsApp Image 2026-11-09 at 15.31.46 (3).jpeg",
+  "WhatsApp Image 2026-11-09 at 15.31.46.jpeg"
+
+
+];
+
+
+let started = false;
+
+
+/* OPEN THE SURPRISE */
+
+function openSurprise() {
+
+  if (started) return;
+  started = true;
+  const song = document.getElementById("birthdaySong");
+  song.volume = 0.8;
+
+  song.play().catch(error => {
+    console.log("Music playback error:", error);
+  });
+
+  document.getElementById("opening").style.display = "none";
+
+  document.getElementById("birthday").style.display = "flex";
+  
+  
+  // Continuous falling photos
+  setInterval(createPhoto, 1500);
+
+  // Floating decorations
+  setInterval(createParticle, 1800);
+
+  // First photo burst
+  for (let i = 0; i < 3; i++) {
+    setTimeout(createPhoto, i * 500);
+  }
+}
+
+
+/* CREATE RANDOM FALLING PHOTOS */
+
+function createPhoto() {
+
+  const img = document.createElement("img");
+
+  img.className = "photo";
+
+  img.src = photos[
+    Math.floor(Math.random() * photos.length)
+  ];
+
+  img.style.left = Math.random() * 90 + "vw";
+
+  const duration = 5 + Math.random() * 6;
+
+  img.style.animationDuration = duration + "s";
+
+  img.style.setProperty(
+    "--start",
+    (Math.random() * 50 - 25) + "deg"
+  );
+
+  img.style.setProperty(
+    "--end",
+    (Math.random() * 100 - 50) + "deg"
+  );
+
+  img.style.setProperty(
+    "--drift",
+    (Math.random() * 180 - 90) + "px"
+  );
+
+  img.onerror = () => img.remove();
+
+  document.body.appendChild(img);
+
+  setTimeout(() => img.remove(), duration * 1000 + 500);
+}
+
+
+/* RANDOM ANIMATED EMOJIS */
+
+function createParticle() {
+
+  const items = [
+    { symbol: "❤️", type: "heart" },
+    { symbol: "💕", type: "heart" },
+    { symbol: "💖", type: "heart" },
+    { symbol: "💗", type: "heart" },
+    { symbol: "🎈", type: "balloon" },
+    { symbol: "🎉", type: "star" },
+    { symbol: "✨", type: "star" },
+    { symbol: "🌟", type: "star" },
+    { symbol: "🌹", type: "rose" },
+    { symbol: "💐", type: "rose" },
+    { symbol: "🥰", type: "heart" },
+    { symbol: "🎁", type: "balloon" }
+  ];
+
+  const item = items[
+    Math.floor(Math.random() * items.length)
+  ];
+
+  const el = document.createElement("div");
+
+  el.className = "particle " + item.type;
+  el.textContent = item.symbol;
+
+  el.style.left = Math.random() * 100 + "vw";
+
+  el.style.fontSize =
+    (20 + Math.random() * 28) + "px";
+
+  const duration = 5 + Math.random() * 4;
+
+  el.style.animationDuration = duration + "s";
+
+  document.body.appendChild(el);
+
+  setTimeout(() => el.remove(), duration * 1000 + 500);
+}
+
+
+</script>
+
+</body>
+</html>
+
